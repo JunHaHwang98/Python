@@ -10,6 +10,8 @@ bankselect= ["국민은행", "신한은행", "기업은행", "카카오뱅크", 
 
 def create():
     code.config(text="     생성 완료     ")
+    code1.insert(0, birth1.get())
+    excel1.insert(0, name1.get())
 
 def click(event):
     payment2.delete(0, "end")
@@ -53,7 +55,14 @@ address1.grid(row=6, column=1)
 
 code = Button(window, text="추천인 코드 생성", command=create)
 code.grid(row=7, column=0)
-code1 = Label(window, text="M07061234")
+code1 = Entry(window)
 code1.grid(row=7, column=1)
+
+excel = Label(window, text="데이터")
+excel.grid(row=8, column=0)
+excel1 = Entry(window)
+excel1.grid(row=8, column=1)
+excel2 = Button(window, text="복사")
+excel2.grid(row=8, column=2)
 
 window.mainloop()
