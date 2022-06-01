@@ -1,5 +1,9 @@
 import tkinter.ttk as ttk
 from tkinter import *
+from tkinter import messagebox
+import random
+import os
+import sys
 
 window = Tk()
 window.title("Insideout 추천인 코드")
@@ -7,14 +11,37 @@ window.geometry("320x240")
 
 sexselect = ["남성", "여성", "알수없음 및 기타"]
 bankselect= ["국민은행", "신한은행", "기업은행", "카카오뱅크", "하나은행", "우리은행", "토스뱅크", "새마을은행", "우체국은행", "케이뱅크", "저축은행", "KDB산업은행", "씨티은행", "SBI저축은행"]
+sexselect1 = "U"
+
+randomnum1 = str(random.randrange(0,10))
+randomnum2 = str(random.randrange(0,10))
+randomnum3 = str(random.randrange(0,10))
+randomnum4 = str(random.randrange(0,10))
+randomnum = (randomnum1+randomnum2+randomnum3+randomnum4)
 
 def create():
     code.config(text="     생성 완료     ")
-    code1.insert(0, birth1.get())
-    excel1.insert(0, name1.get())
+    if sex1.get() == "남성":
+        sexselect1 = "M"
+    elif sex1.get() == "여성":
+        sexselect1 = "W"
+    elif sex1.get() == "알수없음 및 기타":
+        sexselect1 = "E"
+    else :
+        str = StringVar()
+        str = "성별이 선택되지 않았습니다."
+        messagebox.showinfo("알림창" ,str)
+    recode = (sexselect1+birth1.get()[2:6]+randomnum)
+    code1.insert(0, recode)
+    data = (name1.get(), sex1.get(),birth1.get(), payment1.get(), payment2.get(), contact1.get(),address1.get(), recode)
+    excel1.insert(0, data)
 
 def click(event):
     payment2.delete(0, "end")
+
+def restart():
+    os.execl(sys.executable, sys.executable, *sys.argv)
+    restart()
 
 name = Label(window, text="성명")
 name.grid(row=0, column=0)
@@ -64,5 +91,8 @@ excel1 = Entry(window)
 excel1.grid(row=8, column=1)
 excel2 = Button(window, text="복사")
 excel2.grid(row=8, column=2)
+
+reset = Button(window, text="      재시작       ", command=restart)
+reset.grid(row=9, column=0)
 
 window.mainloop()
