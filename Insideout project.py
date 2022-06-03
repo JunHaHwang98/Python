@@ -7,7 +7,7 @@ import sys
 
 window = Tk()
 window.title("Insideout 추천인 코드")
-window.geometry("320x240")
+window.geometry("300x240")
 
 sexselect = ["남성", "여성", "알수없음 및 기타"]
 bankselect= ["국민은행", "신한은행", "기업은행", "카카오뱅크", "하나은행", "우리은행", "토스뱅크", "새마을은행", "우체국은행", "케이뱅크", "저축은행", "KDB산업은행", "씨티은행", "SBI저축은행"]
@@ -20,7 +20,7 @@ randomnum4 = str(random.randrange(0,10))
 randomnum = (randomnum1+randomnum2+randomnum3+randomnum4)
 
 def create():
-    code.config(text="     생성 완료     ")
+    code2.config(text="완료")
     if sex1.get() == "남성":
         sexselect1 = "M"
     elif sex1.get() == "여성":
@@ -33,7 +33,7 @@ def create():
         messagebox.showinfo("알림창" ,str)
     recode = (sexselect1+birth1.get()[2:6]+randomnum)
     code1.insert(0, recode)
-    data = (name1.get(), sex1.get(),birth1.get(), payment1.get(), payment2.get(), contact1.get(),address1.get(), recode)
+    data = (name1.get(), sex1.get(), birth1.get(), payment1.get(), payment2.get(), contact1.get(), address1.get(), recode)
     excel1.insert(0, data)
 
 def click(event):
@@ -80,10 +80,12 @@ address.grid(row=6, column=0)
 address1 = Entry(window)
 address1.grid(row=6, column=1)
 
-code = Button(window, text="추천인 코드 생성", command=create)
+code = Label(window, text="추천인 코드")
 code.grid(row=7, column=0)
 code1 = Entry(window)
 code1.grid(row=7, column=1)
+code2 = Button(window, text="생성", command=create)
+code2.grid(row=7, column=2)
 
 excel = Label(window, text="데이터")
 excel.grid(row=8, column=0)
@@ -93,6 +95,6 @@ excel2 = Button(window, text="복사")
 excel2.grid(row=8, column=2)
 
 reset = Button(window, text="      재시작       ", command=restart)
-reset.grid(row=9, column=0)
+reset.grid(row=9, column=1)
 
 window.mainloop()
