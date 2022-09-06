@@ -4,6 +4,7 @@ from tkinter import messagebox
 import random
 import os
 import sys
+import pandas as pd
 
 window = Tk()
 window.title("Insideout 추천인 코드")
@@ -38,6 +39,13 @@ def create():
 
 def click(event):
     payment2.delete(0, "end")
+
+def excel():
+    pr = []
+    pr.append[name1.get(), sex1.get(), birth1.get(), payment1.get(), payment2.get(), contact1.get(), address1.get(), recode]
+    df = pd.DataFrame(pr, columns=['성명', '성별', '생년월일', '은행'. '계좌번호', '연락처', '주소', '추천인 코드'])
+    writer = pd.ExcelWriter('Insideout.xlsx')
+    df.to_excel(writer, 'Sheet1', index=False)
 
 def restart():
     os.execl(sys.executable, sys.executable, *sys.argv)
@@ -91,7 +99,7 @@ excel = Label(window, text="데이터")
 excel.grid(row=8, column=0)
 excel1 = Entry(window)
 excel1.grid(row=8, column=1)
-excel2 = Button(window, text="복사")
+excel2 = Button(window, text="추가", command=excel)
 excel2.grid(row=8, column=2)
 
 reset = Button(window, text="      재시작       ", command=restart)
