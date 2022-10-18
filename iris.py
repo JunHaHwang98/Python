@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import joblib
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -28,3 +29,5 @@ for i in range(0, len(y_prediction)):
     print("{} : {}".format(X_test[i], iris_dataset['target_names'][y_pred]))
 
 print("accuracy_score : ",knn.score(X_test, y_test))
+
+joblib.dump(knn, './knn_model.pkl')
